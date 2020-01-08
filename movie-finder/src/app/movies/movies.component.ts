@@ -8,25 +8,28 @@ import Movie from '../models/Movie';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-  poularMovies: Array<Movie>;
-  inTheaterMovies: Array<Movie>;
-  singleMovie: Movie;
-  message: null;
+  poularMovies: Movie[];
+  inTheaterMovies: Movie[];
+  popularKidsMovies: Movie[];
+  bestDramaMovies: Movie[];
+
   constructor(private moviesService: MovieService) { }
 
   ngOnInit() {
     this.moviesService.getPopularMovies().subscribe(data => {
       this.poularMovies = data['results'].slice(0, 6);
-      this.singleMovie = this.poularMovies[0];
     });
 
     this.moviesService.getInTheaterMovies().subscribe(data => {
       this.inTheaterMovies = data['results'].slice(0, 6);
     })
-  }
 
-  fromChild(event) {
-    console.log(event);
-    this.message = event;
+    this.moviesService.getPopularKidsMovies().subscribe(data => {
+      this.popularKidsMovies = data['results'].slice(0,6);
+    })
+
+    this.moviesService.getBestDramaMovies().subscribe(data => {
+      this.bestDramaMovies = data['results'].slice(0,6);
+    })
   }
 }
