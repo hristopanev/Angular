@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <h1>Registration Form</h1>
+        <form #form="ngForm" (submit)="register(form.value)">
+        <pre>{{ form.value | json }}</pre>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input name="fullName" pattern="[A-Z][a-z]+\s[A-Z][a-z]+" class="form-control" [(ngModel)]="model.fullName" placeholder="Full Name" required>
+          </div>
+          <div class="alert alert-danger" *ngIf="form?.controls.fullName?.touched && form?.controls.fullName?.errors?.required ">
+                This field is required!
+          </div>
+          <div class="alert alert-danger" *ngIf="form?.controls.fullName?.errors?.pattern">
+                Name should contain space between first and last!
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+            </div>
+            <input name="email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" class="form-control" placeholder="Email Address" type="email" required ngModel>
+          </div>
+          <div class="alert alert-danger" *ngIf="form?.controls.email?.touched && form?.controls.email?.errors?.required ">
+            This field is required!
+        </div>
+          <div class="alert alert-danger" *ngIf="form?.controls.email?.errors?.pattern">
+            Invalid email address!
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+            </div>
+            <select class="custom-select" style="max-width: 120px;">
+                <option value=" {{ number }}" *ngFor='let number of phoneNumbers'> {{ number }} </option>
+            </select>
+            <input name="phoneNumner" pattern="\d{9}" class="form-control" placeholder="Phone number" type="text" required ngModel>
+          </div>
+          <div class="alert alert-danger" *ngIf="form?.controls.phoneNumner?.touched && form?.controls.phoneNumner?.errors?.required ">
+            This field is required!
+        </div>
+          <div class="alert alert-danger" *ngIf="form?.controls.phoneNumner?.errors?.pattern">
+            Invalid phonenumber address!
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+            </div>
+            <select name="jobTitle" class="form-control" required ngModel>
+              <option value="Designer">Designer</option>
+              <option value="Manager">Manager</option>
+              <option value="Accounting">Accounting</option>
+            </select>
+          </div>
+          <div class="alert alert-danger" *ngIf="form?.controls.jobTitle?.touched && form?.controls.jobTitle.errors?.required ">
+            This field is required!
+        </div>
+        <div ngModelGroup="passwords">
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input name="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{3,16}$" class="form-control" placeholder="Create password" type="password" required ngModel>
+            </div>
+            <div class="alert alert-danger" *ngIf="form?.controls.passwords?.controls.password?.errors?.pattern">
+                Password should contains digits and chars!
+            </div>
+            <div class="alert alert-danger" *ngIf="form?.controls.passwords?.controls.password?.touched && form?.controls.passwords?.controls.password?.errors?.required">
+                This field is required!
+            </div>
+                <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input name="confirmPassword" class="form-control" placeholder="Repeat password" type="password" required ngModel>
+            </div>
+            <div class="alert alert-danger" *ngIf="form?.controls.passwords?.controls.confirmPassword?.touched && form?.controls.passwords?.controls.confirmPassword?.errors?.required">
+                This field is required!
+            </div>
+            <div class="alert alert-danger" *ngIf="form?.controls.passwords?.controls.password.value != form?.controls.passwords?.controls.confirmPassword.value">
+                Password do not match
+            </div>
+        </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+            </div>
+            <input name="imageUrl" appImageUrlV class="form-control" placeholder="Image Url" type="url" required ngModel>
+          </div>
+          <div class="alert alert-danger" *ngIf="form.errors?.image">
+
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" > Create Account </button>
+          </div>
+          <p class="text-center">Have an account? <a href="">Log In</a> </p>
+        </form>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+  </div>
