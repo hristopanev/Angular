@@ -13,7 +13,8 @@ export class RegisterFormReactiveComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       fullName: ['', [Validators.required, Validators.pattern(/[A-Z][a-z]+\s[A-Z][a-z]+/)]],
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
+      image: ['', []]
     })
   }
 
