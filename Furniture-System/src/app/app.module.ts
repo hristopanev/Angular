@@ -21,7 +21,6 @@ import { FurnitureAllComponent } from './furniture/furniture-all/furniture-all.c
 import { FurnitureDetailsComponent } from './furniture/furniture-details/furniture-details.component';
 import { FurnitureUserComponent } from './furniture/furniture-user/furniture-user.component';
 import { FurnitureService } from './furniture/furniture.service';
-import { ResponseHandlerInterceptorService } from './response-handler-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -44,13 +43,12 @@ import { ResponseHandlerInterceptorService } from './response-handler-intercepto
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    ToastrModule,
   ],
   providers: [ 
     AuthService,
     FurnitureService,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
-    {provide: HTTP_INTERCEPTORS, useClass: ResponseHandlerInterceptorService, multi: true }
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
